@@ -336,3 +336,586 @@ Which of the following SQL statements would return a list of all unique countrie
 - [ ] SELECT * FROM Customers WHERE Country IS UNIQUE;
 
 题目要求返回唯一国家列表，标准SQL语法应使用DISTINCT关键字。虽然某些数据库可能支持UNIQUE作为DISTINCT的同义词，但不是所有DBMS都支持，因此DISTINCT是通用标准答案。
+
+------
+
+## SQL WHERE 子句
+
+### WHERE 子句的作用
+
+WHERE 子句用于**筛选**记录，仅提取满足**指定条件**的记录。
+
+### 示例
+
+选择所有来自墨西哥的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE Country='Mexico';
+```
+
+### 语法
+
+```sql
+SELECT 列名1, 列名2, ...
+FROM 表名
+WHERE 条件;
+```
+
+> 注意：WHERE 子句不仅用于SELECT语句，还用于UPDATE、DELETE等操作！
+
+### 演示数据库
+
+以下是示例中使用的Customers表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------------------------- | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Luleå       | S-958 22   | Sweden  |
+
+### 文本字段与数字字段的区别
+
+SQL要求在文本值周围使用单引号（大多数数据库系统也允许双引号），而数字字段不应加引号：
+
+### 示例
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID = 1;
+```
+
+### **WHERE** 子句中的运算符
+
+除了等号(=)运算符外，还可以使用其他运算符来筛选数据。
+
+### 示例
+
+选择CustomerID大于80的所有客户：
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID > 80;
+```
+
+### 可用运算符
+
+| 运算符      | 描述                              | 示例                                 |
+| :---------- | :-------------------------------- | :----------------------------------- |
+| **=**       | 等于                              |                                      |
+| >           | 大于                              |                                      |
+| <           | 小于                              |                                      |
+| >=          | 大于或等于                        |                                      |
+| <=          | 小于或等于                        |                                      |
+| **<>**      | 不等于（某些SQL版本中可能写作!=） | WHERE Price <> 18;                   |
+| **BETWEEN** | 在某个范围内                      | WHERE Price BETWEEN 50 AND 60;       |
+| **LIKE**    | 搜索某种模式                      | WHERE City LIKE 's%'; (s 开头的城市) |
+| **IN**      | 指定列的多个可能值                | WHERE City IN ('Paris','London');    |
+
+### 练习
+
+❓ WHERE子句的主要用途是什么？
+
+- [ ] 指定要从中选择数据的表
+
+- [x] 筛选满足指定条件的记录
+
+- [ ] 连接多个表
+
+- [ ] 按升序排序记录
+
+  ------
+
+  
+
+## SQL ORDER BY 关键字
+
+### ORDER BY 的作用
+
+ORDER BY 关键字用于对**结果集**进行**升序**或**降序**排序。
+
+### 示例
+
+按价格对产品进行排序：
+
+```sql
+SELECT * FROM Products
+ORDER BY Price;
+```
+
+### 语法
+
+```sql
+SELECT 列名1, 列名2, ...
+FROM 表名
+ORDER BY 列名1, 列名2, ... 升序|降序;
+```
+
+演示数据库
+
+以下是示例中使用的Products表的部分数据：
+
+| ProductID | ProductName                  | SupplierID | CategoryID | Unit                | Price |
+| :-------- | :--------------------------- | :--------- | :--------- | :------------------ | :---- |
+| 1         | Chais                        | 1          | 1          | 10 boxes x 20 bags  | 18    |
+| 2         | Chang                        | 1          | 1          | 24 - 12 oz bottles  | 19    |
+| 3         | Aniseed Syrup                | 1          | 2          | 12 - 550 ml bottles | 10    |
+| 4         | Chef Anton's Cajun Seasoning | 2          | 2          | 48 - 6 oz jars      | 22    |
+| 5         | Chef Anton's Gumbo Mix       | 2          | 2          | 36 boxes            | 21.35 |
+
+### 降序排序
+
+ORDER BY 关键字**默认按升序**排序。要按降序排序，需使用 DESC 关键字。
+
+### 示例
+
+按价格从高到低排序产品：
+
+```sql
+SELECT * FROM Products
+ORDER BY Price DESC;
+```
+
+### 字母顺序排序
+
+对于字符串值，ORDER BY 关键字会按字母顺序排序：
+
+### 示例
+
+按产品名称字母顺序排序：
+
+```sql
+SELECT * FROM Products
+ORDER BY ProductName;
+```
+
+### 字母逆序排序
+
+要按字母逆序排序，使用 DESC 关键字：
+
+### 示例
+
+按产品名称字母逆序排序：
+
+```sql
+SELECT * FROM Products
+ORDER BY ProductName DESC;
+```
+
+### 多列排序
+
+以下SQL语句从"Customers"表中选择所有客户，先按"Country"排序，如果**某些行Country相同，则按"CustomerName"排序**：
+
+### 示例
+
+```sql
+SELECT * FROM Customers
+ORDER BY Country, CustomerName;
+```
+
+### 混合使用ASC和DESC
+
+以下SQL语句从"Customers"表中选择所有客户，按"Country"升序排序，按"CustomerName"降序排序：
+
+### 示例
+
+```sql
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+```
+
+### 练习
+
+❓ SQL ORDER BY 关键字的主要用途是什么？
+
+- [ ] 根据条件筛选记录
+
+- [ ] 将具有相同值的记录分组
+
+- [x] 按升序或降序对记录进行排序
+
+  ------
+
+## SQL AND 运算符
+
+### AND 运算符的作用
+
+WHERE 子句可以包含一个或多个 AND 运算符。AND 运算符用于基于多个条件**筛选**记录，例如您想返回所有来自西班牙且名称以字母'G'开头的客户：
+
+示例
+
+选择所有来自西班牙且名称以'G'开头的客户：
+
+```sql
+SELECT *
+FROM Customers
+WHERE Country = 'Spain' AND CustomerName LIKE 'G%';
+```
+
+### 语法
+
+```sql
+SELECT 列名1, 列名2, ...
+FROM 表名
+WHERE 条件1 AND 条件2 AND 条件3 ...;
+```
+
+### AND 与 OR 的区别
+
+- AND 运算符：仅当所有条件都为 TRUE 时显示记录
+- OR 运算符：只要任一条件为 TRUE 就显示记录
+
+### 演示数据库
+
+以下是示例中使用的Customers表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------------------------- | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Luleå       | S-958 22   | Sweden  |
+
+### 所有条件必须为真
+
+以下SQL语句选择Country为"Germany"、City为"Berlin"且PostalCode大于12000的所有客户记录：
+
+### 示例
+
+```sql
+SELECT * FROM Customers
+WHERE Country = 'Germany'
+AND City = 'Berlin'
+AND PostalCode > 12000;
+```
+
+### 组合使用 AND 和 OR
+
+可以组合使用 AND 和 OR 运算符。
+
+以下SQL语句选择所有来自西班牙且名称以"G"或"R"开头的客户。注意使用括号确保正确结果。
+
+### 正确示例
+
+选择所有名称以"G"或"R"开头的西班牙客户：
+
+```sql
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
+```
+
+### 错误示例（缺少括号）
+
+如果不使用括号，查询将返回：
+
+1. 所有来自西班牙且名称以"G"开头的客户
+2. 所有名称以"R"开头的客户（不考虑国家）
+
+```sql
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
+```
+
+### 练习
+
+❓ 哪个SQL关键字用于基于多个条件筛选记录？
+
+- [x] WHERE
+
+- [ ] FILTER
+
+- [ ] MULTI
+
+- [ ] IN
+
+  ------
+
+  以下 OR 的内容有所重复，可以酌情跳过~~~
+
+## SQL OR 运算符
+
+### OR 运算符的作用
+
+WHERE 子句可以包含一个或多个 OR 运算符。OR 运算符用于基于多个条件筛选记录，只要满足任一条件即可返回记录。例如，您想返回所有来自德国或西班牙的客户：
+
+### 示例
+
+选择所有来自德国或西班牙的客户：
+
+```sql
+SELECT *
+FROM Customers
+WHERE Country = 'Germany' OR Country = 'Spain';
+```
+
+### 语法
+
+```sql
+SELECT 列名1, 列名2, ...
+FROM 表名
+WHERE 条件1 OR 条件2 OR 条件3 ...;
+```
+
+### OR 与 AND 的区别
+
+- OR 运算符：只要任一条件为 TRUE 就显示记录
+- AND 运算符：仅当所有条件都为 TRUE 时显示记录
+
+### 演示数据库
+
+以下是示例中使用的Customers表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------------------------- | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Luleå       | S-958 22   | Sweden  |
+
+### 至少满足一个条件
+
+以下SQL语句选择City为"Berlin"、或CustomerName以"G"开头、或Country为"Norway"的所有客户记录：
+
+### 示例
+
+```sql
+SELECT * FROM Customers
+WHERE City = 'Berlin' OR CustomerName LIKE 'G%' OR Country = 'Norway';
+```
+
+### 组合使用 AND 和 OR
+
+可以组合使用 AND 和 OR 运算符。
+
+以下SQL语句选择所有来自西班牙且名称以"G"或"R"开头的客户。注意使用括号确保正确结果。
+
+### 正确示例
+
+选择所有名称以"G"或"R"开头的西班牙客户：
+
+```sql
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND (CustomerName LIKE 'G%' OR CustomerName LIKE 'R%');
+```
+
+### 错误示例（缺少括号）
+
+如果不使用括号，查询将返回：
+
+1. 所有来自西班牙且名称以"G"开头的客户
+2. 所有名称以"R"开头的客户（不考虑国家）
+
+```sql
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
+```
+
+### 练习
+
+❓ SQL OR 运算符的主要用途是什么？
+
+- [x] 基于多个条件筛选记录，其中至少一个条件为真
+
+- [ ] 基于多个条件筛选记录，其中所有条件必须为真
+
+- [ ] 按降序对记录排序
+
+- [ ] 计算表中的行数
+
+  ------
+
+  
+
+## SQL NOT 运算符
+
+## NOT 运算符的作用
+NOT 运算符与其他运算符结合使用，返回相反（否定）的结果。
+
+### 基本示例
+选择所有不来自西班牙的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE NOT Country = 'Spain';
+```
+
+### 语法
+
+```sql
+SELECT 列名1, 列名2, ...
+FROM 表名
+WHERE NOT 条件;
+```
+
+### 演示数据库
+
+以下是示例中使用的Customers表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | City        | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Berlin      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | México D.F. | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | México D.F. | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | London      | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Luleå       | Sweden  |
+
+### NOT 运算符的常见用法
+
+#### 1. NOT LIKE
+
+选择名称不以'A'开头的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerName NOT LIKE 'A%';
+```
+
+#### 2. NOT BETWEEN
+
+选择CustomerID不在10到60之间的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE CustomerID NOT BETWEEN 10 AND 60; 
+```
+
+p.s: 1~9， 61 ~ * 
+
+#### 3. NOT IN
+
+选择不在巴黎或伦敦的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE City NOT IN ('Paris', 'London');
+```
+
+#### 4. NOT 与比较运算符
+
+选择CustomerID不大于50的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE NOT CustomerID > 50;
+/* 等效写法：WHERE CustomerID !> 50 */
+```
+
+选择CustomerID不小于50的客户：
+
+```sql
+SELECT * FROM Customers
+WHERE NOT CustomerID < 50;
+/* 等效写法：WHERE CustomerID !< 50 */
+```
+
+### 练习
+
+❓ SQL NOT 运算符的主要用途是什么？
+
+- [ ] 筛选符合指定条件的记录
+
+- [x] 筛选不符合指定条件的记录
+
+- [ ] 筛选符合多个条件的记录
+
+- [ ] 筛选完全等于指定条件的记录
+
+  ------
+
+
+
+## SQL INSERT INTO 语句
+
+### INSERT INTO 的作用
+
+INSERT INTO 语句用于向表中插入新记录。
+
+### 语法格式
+
+有两种写法：
+
+1. 指定列名和对应值：
+
+```sql
+INSERT INTO 表名 (列1, 列2, 列3, ...)
+VALUES (值1, 值2, 值3, ...);
+```
+
+1. 为**所有列**插入值（需确保值顺序与列顺序一致）：
+
+```sql
+INSERT INTO 表名
+VALUES (值1, 值2, 值3, ...);
+```
+
+### 演示数据库
+
+Customers表部分数据：
+
+| CustomerID | CustomerName         | ContactName     | Address                     | City     | PostalCode | Country |
+| :--------- | :------------------- | :-------------- | :-------------------------- | :------- | :--------- | :------ |
+| 89         | White Clover Markets | Karl Jablonski  | 305 - 14th Ave. S. Suite 3B | Seattle  | 98128      | USA     |
+| 90         | Wilman Kala          | Matti Karttunen | Keskuskatu 45               | Helsinki | 21240      | Finland |
+
+### 基本示例
+
+插入新客户记录：
+
+```sql
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+```
+
+> 注意：CustomerID是自增字段，会自动生成
+>
+> 插入效果：
+>
+> | CustomerID | CustomerName         | ContactName     | Address                     | City      | PostalCode | Country |
+> | :--------- | :------------------- | :-------------- | :-------------------------- | :-------- | :--------- | :------ |
+> | 89         | White Clover Markets | Karl Jablonski  | 305 - 14th Ave. S. Suite 3B | Seattle   | 98128      | USA     |
+> | 90         | Wilman Kala          | Matti Karttunen | Keskuskatu 45               | Helsinki  | 21240      | Finland |
+> | 91         | Wolski               | Zbyszek         | ul. Filtrowa 68             | Walla     | 01-012     | Poland  |
+> | 92         | Cardinal             | Tom B. Erichsen | Skagen 21                   | Stavanger | 4006       | Norway  |
+
+### 部分列插入
+
+只插入指定列数据（其他列为NULL）：
+
+```sql
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('Cardinal', 'Stavanger', 'Norway');
+```
+
+> 插入效果：
+>
+> | CustomerID | CustomerName         | ContactName     | Address                     | City      | PostalCode | Country |
+> | :--------- | :------------------- | :-------------- | :-------------------------- | :-------- | :--------- | :------ |
+> | 89         | White Clover Markets | Karl Jablonski  | 305 - 14th Ave. S. Suite 3B | Seattle   | 98128      | USA     |
+> | 90         | Wilman Kala          | Matti Karttunen | Keskuskatu 45               | Helsinki  | 21240      | Finland |
+> | 91         | Wolski               | Zbyszek         | ul. Filtrowa 68             | Walla     | 01-012     | Poland  |
+> | 92         | Cardinal             | null            | null                        | Stavanger | null       | Norway  |
+
+### 批量插入
+
+一次插入多行数据：
+
+```sql
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES
+('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway'),
+('Greasy Burger', 'Per Olsen', 'Gateveien 15', 'Sandnes', '4306', 'Norway'),
+('Tasty Tee', 'Finn Egan', 'Streetroad 19B', 'Liverpool', 'L1 0AA', 'UK');
+```
+
+### 练习
+
+❓ SQL INSERT INTO 语句的主要用途是什么？
+
+- [ ] 更新表中的记录
+- [ ] 删除表中的记录
+- [x] 向表中添加新记录
+- [ ] 从表中检索记录
