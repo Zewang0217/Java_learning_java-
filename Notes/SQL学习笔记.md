@@ -1,4 +1,13 @@
-[点击跳转到原文](https://www.w3schools.com/sql/default.asp)
+[点击跳转到w3school的SQL学习界面](https://www.w3schools.com/sql/default.asp)
+
+------
+
+# 目录：
+
++ [SQL简介](#SQL简介)
++ [基本语法与语句详解](#SQL 语法基础)
+
+
 
 ## SQL简介
 
@@ -919,3 +928,397 @@ VALUES
 - [ ] 删除表中的记录
 - [x] 向表中添加新记录
 - [ ] 从表中检索记录
+
+  ------
+
+  ## NULL  Value
+
+  字段的 **NULL 值** 表示该字段没有值。
+
+  如果表中的字段是可选字段，可以在插入新记录或更新记录时不向该字段添加值。此时，该字段将以 NULL 值保存。
+
+  > **注意**：  
+  > NULL 值不同于：  
+  > - 零值（0）  
+  > - 包含空格的字段  
+  > 真正的 NULL 值是创建记录时留空的字段！
+
+  
+
+  ### 如何检测 NULL 值？
+
+  不能用常规比较运算符（如 `=`、`<` 或 `<>`）检测 NULL 值。
+
+  必须使用以下特殊运算符：  
+  - `IS NULL`  
+  - `IS NOT NULL`  
+
+  ### **IS** NULL 语法
+
+```sql
+SELECT column_names
+FROM table_name
+WHERE column_name IS NULL;
+```
+
+### IS NOT NULL 语法
+
+```sql
+SELECT column_names
+FROM table_name
+WHERE column_name IS NOT NULL;
+```
+
+------
+
+### 演示数据库
+
+以下是示例中使用的 Customers 表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------------------------- | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | NULL                          | London      | WA1 1DP    | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Luleå       | S-958 22   | Sweden  |
+
+------
+
+### IS NULL 运算符
+
+用于检测空值（NULL 值）。
+
+以下 SQL 列出 "Address" 字段为 NULL 的所有客户：
+
+```sql
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NULL;
+```
+
+> **提示**：
+> 始终使用 `IS NULL` 查找 NULL 值。
+
+------
+
+### IS NOT NULL 运算符
+
+用于检测非空值（NOT NULL 值）。
+
+以下 SQL 列出 "Address" 字段有值的所有客户：
+
+```sql
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NOT NULL;
+```
+
+------
+
+### 练习
+
+❓ SQL 中的 NULL 值是什么？
+
+- [x] 没有值的字段
+
+- [ ] 值为零的字段
+
+- [ ] 包含空格的字段
+
+- [ ] 已被删除的字段
+
+  ------
+
+  ## UPDATE 语句
+
+  UPDATE 语句用于**修改**表中的现有记录。
+
+  ### UPDATE 语法
+
+```sql
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+```
+
+> **重要提示**：
+> 更新表记录时请务必小心！UPDATE 语句中的 WHERE 子句指定了要更新的记录。**如果省略 WHERE 子句，表中的所有记录都将被更新！**
+
+------
+
+### 演示数据库
+
+以下是示例中使用的 Customers 表的部分数据：
+
+| CustomerID | CustomerName                       | ContactName        | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :----------------- | :---------------------------- | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste                | Maria Anders       | Obere Str. 57                 | Berlin      | 12209      | Germany |
+| 2          | Ana Trujillo Emparedados y helados | Ana Trujillo       | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Antonio Moreno     | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| 4          | Around the Horn                    | Thomas Hardy       | 120 Hanover Sq.               | London      | WA1 1DP    | UK      |
+| 5          | Berglunds snabbköp                 | Christina Berglund | Berguvsvägen 8                | Luleå       | S-958 22   | Sweden  |
+
+------
+
+### 更新单个记录
+
+以下 SQL 语句更新第一个客户（CustomerID = 1）的联系人和城市信息：
+
+```sql
+UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1;
+```
+
+更新后的表数据：
+
+| CustomerID | CustomerName        | ContactName    | Address       | City      | PostalCode | Country |
+| :--------- | :------------------ | :------------- | :------------ | :-------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste | Alfred Schmidt | Obere Str. 57 | Frankfurt | 12209      | Germany |
+| ...        | ...                 | ...            | ...           | ...       | ...        | ...     |
+
+------
+
+### 更新多个记录
+
+WHERE 子句决定了有多少条记录会被更新。
+
+以下 SQL 语句将所有墨西哥客户的 ContactName 更新为 "Juan"：
+
+```sql
+UPDATE Customers
+SET ContactName = 'Juan'
+WHERE Country = 'Mexico';
+```
+
+更新后的表数据：
+
+| CustomerID | CustomerName                       | ContactName | Address                       | City        | PostalCode | Country |
+| :--------- | :--------------------------------- | :---------- | :---------------------------- | :---------- | :--------- | :------ |
+| 2          | Ana Trujillo Emparedados y helados | Juan        | Avda. de la Constitución 2222 | México D.F. | 05021      | Mexico  |
+| 3          | Antonio Moreno Taquería            | Juan        | Mataderos 2312                | México D.F. | 05023      | Mexico  |
+| ...        | ...                                | ...         | ...                           | ...         | ...        | ...     |
+
+------
+
+### 更新警告！
+
+如果省略 WHERE 子句，将会更新表中的所有记录！
+
+```sql
+UPDATE Customers
+SET ContactName = 'Juan';
+```
+
+更新后的表数据：
+
+| CustomerID | CustomerName        | ContactName | Address       | City        | PostalCode | Country |
+| :--------- | :------------------ | :---------- | :------------ | :---------- | :--------- | :------ |
+| 1          | Alfreds Futterkiste | Juan        | Obere Str. 57 | Frankfurt   | 12209      | Germany |
+| 2          | Ana Trujillo...     | Juan        | Avda...       | México D.F. | 05021      | Mexico  |
+| ...        | ...                 | Juan        | ...           | ...         | ...        | ...     |
+
+------
+
+### 练习
+
+❓ SQL UPDATE 语句的作用是什么？
+
+- [ ] 向表中添加新记录
+
+- [ ] 从表中删除记录
+
+- [x] 修改表中的现有记录
+
+- [ ] 从表中检索记录
+
+  ------
+
+  + **由于第一部分并不算难，建议直接阅读原文，其他关键字就不举例子了**
+
+------
+
+
+
+## DELETE 语句
+
+### 基本语法
+
++ ```sql
+  DELETE FROM 表名称 WHERE 条件;
+  ```
+
+  ### 关键说明
+
+  1. **WHERE子句必须谨慎使用**
+     - 指定要删除的具体记录
+     - 若省略WHERE条件，将删除表中所有数据
+  2. 与DROP TABLE的区别
+     - DELETE只删除数据，保留表结构
+     - DROP TABLE会完全删除表结构和数据
+
+  ### 注意事项
+
+  ⚠️ 执行DELETE前建议：
+
+  - 先使用SELECT语句确认要删除的记录
+  - 重要数据操作前进行备份
+  - 在生产环境谨慎执行无WHERE条件的DELETE
+
+  ### 使用示例
+
+  ```sql
+  -- 删除特定客户
+  DELETE FROM Customers WHERE CustomerID = 1;
+  
+  -- 删除符合条件的所有记录
+  DELETE FROM Orders WHERE OrderDate < '2020-01-01';
+  ```
+
+  ### 最佳实践
+
+  1. 使用事务确保操作可回滚
+
+  ```sql
+  BEGIN TRANSACTION;
+  DELETE FROM Products WHERE Discontinued = 1;
+  -- 确认无误后
+  COMMIT;
+  -- 发现问题可回滚
+  -- ROLLBACK;
+  ```
+
+  1. 考虑使用软删除(标记删除)替代物理删除
+
+  ```sql
+  UPDATE Customers SET IsDeleted = 1 WHERE CustomerID = 5;
+  ```
+
+  1. 大批量删除时考虑分批执行
+
+  ```sql
+  DELETE TOP (1000) FROM Logs WHERE CreateDate < DATEADD(year, -1, GETDATE());
+  ```
+
+------
+
+## TOP, LIMIT, TETCH, FIRST or ROWNUM
+
+用于指定返回的记录数量，适用于处理大型表（避免性能影响）。  
+
+### 基础语法
+
+#### SQL Server/MS Access
+
+```sql
+SELECT TOP number|percent column_name(s)
+FROM table_name
+WHERE condition;
+```
+
+#### MySQL
+
+```sql
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT number;
+```
+
+#### Oracle 12+
+
+```sql
+SELECT column_name(s)
+FROM table_name
+FETCH FIRST number ROWS ONLY;
+```
+
+### 关键示例
+
+1. **返回前3条记录**
+
+   - SQL Server:
+
+     ```sql
+     SELECT TOP 3 * FROM Customers;
+     ```
+
+   - MySQL:
+
+     ```sql
+     SELECT * FROM Customers LIMIT 3;
+     ```
+
+   - Oracle:
+
+     ```sql
+     SELECT * FROM Customers FETCH FIRST 3 ROWS ONLY;
+     ```
+
+2. **按条件筛选**（返回德国客户的前3条）
+
+   - SQL Server:
+
+     ```sql
+     SELECT TOP 3 * FROM Customers WHERE Country='Germany';
+     ```
+
+   - MySQL/Oracle: 替换为对应语法（`LIMIT`/`FETCH FIRST`）。
+
+3. **排序后返回**（按客户名降序取前3条）
+
+   - SQL Server:
+
+     ```sql
+     SELECT TOP 3 * FROM Customers ORDER BY CustomerName DESC;
+     ```
+
+### 注意事项
+
+- 部分数据库不支持 `SELECT TOP`（如MySQL用 `LIMIT`，Oracle用 `FETCH FIRST`）。
+- 旧版Oracle需使用 `ROWNUM` 或子查询实现。
+
+
+
+
+
+
+
+------
+
+
+
++ 下附总结表格：
+
+| 关键字              | 语法                                             | 作用               |
+| :------------------ | :----------------------------------------------- | :----------------- |
+| **SQL SELECT**      | `SELECT 列名 FROM 表名`                          | 从数据库中选择数据 |
+| **SELECT DISTINCT** | `SELECT DISTINCT 列名 FROM 表名`                 | 返回唯一不同的值   |
+| **WHERE**           | `SELECT 列名 FROM 表名 WHERE 条件`               | 过滤记录           |
+| **ORDER BY**        | `SELECT 列名 FROM 表名 ORDER BY 列名 [ASC|DESC]` | 结果排序           |
+| **AND/OR/NOT**      | `WHERE 条件1 AND/OR/NOT 条件2`                   | 组合多个条件       |
+| **INSERT INTO**     | `INSERT INTO 表名 (列1,列2) VALUES (值1,值2)`    | 插入新记录         |
+| **NULL VALUES**     | `WHERE 列名 IS [NOT] NULL`                       | 空值检测           |
+| **UPDATE**          | `UPDATE 表名 SET 列1=值1,列2=值2 WHERE 条件`     | 修改记录           |
+| **DELETE**          | `DELETE FROM 表名 WHERE 条件`                    | 删除记录           |
+| **SELECT TOP**      | `SELECT TOP 数量 列名 FROM 表名`                 | 限制返回行数       |
+| **MIN/MAX**         | `SELECT MIN(列名)/MAX(列名) FROM 表名`           | 找最小/最大值      |
+| **COUNT**           | `SELECT COUNT(列名) FROM 表名`                   | 计数               |
+| **SUM**             | `SELECT SUM(列名) FROM 表名`                     | 求和               |
+| **AVG**             | `SELECT AVG(列名) FROM 表名`                     | 求平均值           |
+| **LIKE**            | `WHERE 列名 LIKE 模式`                           | 模式匹配           |
+| **IN**              | `WHERE 列名 IN (值1,值2)`                        | 多值匹配           |
+| **BETWEEN**         | `WHERE 列名 BETWEEN 值1 AND 值2`                 | 范围查询           |
+| **AS (Aliases)**    | `SELECT 列名 AS 别名 FROM 表名`                  | 创建别名           |
+| **JOINS**           | `SELECT 列名 FROM 表1 JOIN 表2 ON 表1.列=表2.列` | 连接多表           |
+| **GROUP BY**        | `SELECT 列名 FROM 表名 GROUP BY 列名`            | 分组查询           |
+| **HAVING**          | `GROUP BY 列名 HAVING 条件`                      | 分组后过滤         |
+| **EXISTS**          | `WHERE EXISTS (子查询)`                          | 存在性检查         |
+| **CASE**            | `CASE WHEN 条件1 THEN 结果1 ELSE 结果2 END`      | 条件表达式         |
+
+------
+
+
+
++ 
