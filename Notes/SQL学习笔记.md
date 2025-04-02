@@ -1279,15 +1279,11 @@ FETCH FIRST number ROWS ONLY;
 - 部分数据库不支持 `SELECT TOP`（如MySQL用 `LIMIT`，Oracle用 `FETCH FIRST`）。
 - 旧版Oracle需使用 `ROWNUM` 或子查询实现。
 
+  ------
 
+- 以上就是关键字的全部内容，接下来开始聚合函数部分
 
-
-
-
-
-------
-
-
+- [点击跳转](SQL学习笔记2.md)
 
 + 下附总结表格：
 
