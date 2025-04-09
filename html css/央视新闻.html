@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>央视新闻</title>
+
+    <!-- 外部样式-->
+    <link rel="stylesheet" href="css/news.css">
+
+    <!-- 内部样式-->
+     <style>
+         span{
+             color:gray;
+         }
+
+         a {
+            /*取出超链接下方的下划线 */
+            text-decoration: none;
+         }
+
+         p {
+            /* 设置行高 */
+            line-height: 30px;
+            /* 首行缩进 */
+            text-indent: 2em;
+            
+         }
+
+         .container {
+            width: 70%; /* 设置容器宽度为 70% */
+            margin: 0 auto; /* 水平居中，上下为0 */
+            padding: 20px; /* 可选：添加一些内边距 */
+            box-sizing: border-box; /* 确保内边距和边框包含在宽度内 */
+
+        }
+
+        #div1 {
+            width:400px;
+            height:auto;
+            padding : 30px; /* 内边距 */
+            border : 10px solid #79c8e0; /* 边框 */
+            margin: 30px auto; /* 水平居中 */
+            background-color: rgb(153, 236, 236);
+            box-sizing: border-box; /* 确保内边距和边框包含在宽度内 */
+            
+        }
+         
+
+     </style>
+
+</head>
+<body>
+    <!-- 定义一个标题，标题内容：央视新闻-->
+    <h1>央视新闻</h1>
+    <!--定义一个超链接：里面展示央视网-->
+    <!-- a 超链接标签：
+         href：超链接地址
+         target：超链接打开方式
+         _self：当前页面打开
+         _blank：新页面打开
+    -->
+    <a href="https://www.cctv.com/" target="_blank" class = "link">央视网</a>
+
+    <!-- 行内样式-->
+    <!-- <span style = "color:gray;">2024.4.9 16:09</span>     -->
+
+    <span>2024.4.9 16:09</span>
+
+    <span>  这啥   </span>
+    <br><br>
+
+    <!----------------------------------- 正文 --------------------------->
+    <!-- 定义一个视频，width为800 -->
+    <!-- video 标签属性
+         src : 视频地址
+         controls : 视频控制条
+         autoplay : 自动播放
+         loop : 循环播放
+         视频宽度：width
+         视频高度：height
+         建议：宽度和高度只设置一个
+           单位：
+              px：像素
+              %：百分比 -> 相对于父元素的百分比
+
+    -->
+    
+    <br><br>
+
+
+
+     <br><br>
+     <div class="container">
+        <!-- 定义一个标题，标题内容：央视新闻-->
+        <h1>央视新闻</h1>
+        <!--定义一个超链接：里面展示央视网-->
+        <a href="https://www.cctv.com/" target="_blank" class="link">央视网</a>
+
+        <!-- 行内样式-->
+        <span>2024.4.9 16:09</span>
+        <span> 这啥 </span>
+        <br><br>
+
+        <!----------------------------------- 正文 --------------------------->
+        <!-- 定义一个视频，宽度为100% -->
+
+        <video width="%100" controls loop>
+        </video>
+        <br><br>
+
+        <p>
+            <b>计算机中</b>在，SHR（Shift Right）指令通常表示逻辑右移。它的作用是将二进制数向右移动指定的位数，左侧空出的位用 0 填充，而移出的最低位会被丢弃。
+            
+            逻辑右移（SHR）的工作原理：
+            
+            二进制数向右移动：每一位向右移动指定的位数。
+            
+            左侧补0：移动后，左侧（高位）空出的位用 0 填充。
+            
+            丢弃溢出的位：最右侧（低位）被移出的位会被丢弃。
+        </p>
+
+        <p>another paragraph</p>
+
+        <!-- 定义一张图片 -->
+        <img src="images/1.jpg" width="%100" alt="图片描述">
+    </div>
+
+     <p>another paragraph</p>
+
+     <!-- 定义一张图片 -->
+     <!-- img 标签属性
+         src : 图片地址
+           1.绝对路径：
+             绝对磁盘路径 （不推荐）
+             绝对网络路径
+           2。相对路径：
+             ./ ：当前目录 （可省略）
+            ../ ：上一级目录
+            ../../ ：上两级目录
+            ../../../ ：上三级目录
+         alt : 图片描述
+         图片宽度：width
+         图片高度：height
+         建议：宽度和高度只设置一个
+        
+     -->
+     <img src="images/1.jpg" alt="图片描述" width="80%">
+
+
+<br><br><br><br>
+
+<!--演示盒子模型-->
+<div id ="div1">
+    <p>
+        盒子模型（Box Model）是网页布局中非常重要的概念。它描述了一个元素在网页中的大小和位置。
+        盒子模型由四个部分组成：
+        1. 内容区域（Content Area）：
+        内容区域是元素的实际内容，例如文本、图像或其他元素。
+        2. 内边距（Padding）：
+        内边距是内容区域与边框之间的空白区域。
+        3. 边框（Border）：
+        边框是元素的边界，它将内容区域和内边距分隔开。
+        4. 外边距（Margin）：
+        外边距是元素与其他元素之间的空白区域。
+    </p>
+    
+    <p>
+    盒子模型是网页布局的基础，它允许我们控制元素的大小和位置，从而实现各种布局效果。
+    我们可以通过设置元素的宽度、高度、内边距、边框和外边距来控制盒子模型的大小和位置。
+    例如，我们可以使用 width 和 height 属性来设置内容区域的宽度和高度，
+    使用 padding 属性来设置内边距，使用 border 属性来设置边框，
+    使用 margin 属性来设置外边距。
+    盒子模型的大小和位置是网页布局的重要组成部分，它可以帮助我们实现各种布局效果，
+    例如居中对齐、水平和垂直对齐、浮动布局等。
+    了解盒子模型是网页布局的基础，它是网页开发中非常重要的概念。
+    希望以上内容能够帮助你理解盒子模型的概念和用法。
+    </p>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+    <!-- form表单
+         action：表单提交的地址
+         method：表单提交的方式
+         get：表单提交的参数会拼接在url后面，不安全 -> 表单数据跟在url之后，明文
+         例：http://127.0.0.1:5500/save?name=Tom&age=12
+         post：表单提交的参数不会拼接在url后面，安全 -> 会在消息体/请求体中提交到服务器
+
+    注意：表单项要想采集数据，需要设置name属性
+ -->
+
+ <!-- 提示词
+     搜索表单区域，具体说明如下：
+     1.组成：三个表单项和里两个操作按钮 
+       表单项具体为：姓名（文本输入框），性别（下拉选择），职位，（下拉选择，
+       包括班主任，讲师，学工主管，教研主管，咨询师，默认为空）
+       操作按钮具体为：查询，重置
+     2.布局：
+       姓名和性别，职位，查询，重置四个表单项，展示在一行里面，
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单标签</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+        .form-container label {
+            margin-right: 5px;
+        }
+        .form-container select, .form-container input[type="text"] {
+            padding: 5px;
+        }
+        .form-container input[type="submit"], .form-container input[type="reset"] {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="/search" method="post" class="form-container">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" placeholder="请输入姓名">
+        
+        <label for="gender">性别:</label>
+        <select id="gender" name="gender">
+            <option value="">请选择</option>
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        
+        <label for="position">职位:</label>
+        <select id="position" name="position">
+            <option value="">请选择</option>
+            <option value="class_teacher">班主任</option>
+            <option value="lecturer">讲师</option>
+            <option value="student_affairs_officer">学工主管</option>
+            <option value="curriculum_officer">教研主管</option>
+            <option value="counselor">咨询师</option>
+        </select>
+        
+        <input type="submit" value="查询">
+        <input type="reset" value="重置">
+    </form>
+
+</body>
+</html>

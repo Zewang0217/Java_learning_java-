@@ -1,0 +1,135 @@
+<!-- 提示词：
+    你是一名前端开发工程师，现需要制作一个html页面，分为四个部分
+    先实现第一个部分：顶部导航栏：
+    1.内容：要展示一个醒目（加粗展示）的标题，标题内容：Tlias智能学习辅助系统：还要展示一个“退出登录”的超链接 
+    2.布局：标题和退出登录的超链接，展示在一行里面。标题居左展示，退出登录的超链接居右展示
+    3.给整个顶部导航栏设置一个灰色的导航栏
+    帮我生长这个html界面
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>员工管理页面</title>
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+<body>
+   <div id="container1">
+     <!-- 顶部导航栏 -->
+     <div class="navbar">
+        <div class="navbar-title">
+            <h1><strong>Tlias智能学习辅助系统</strong></h1>
+        </div>
+        <div class="navbar-link">
+            <a href="#" class="logout-link">退出登录</a>
+        </div>
+    </div>
+
+    <!-- 其他页面内容 -->
+    <!-- 搜索栏 -->
+
+    <form action="/search" method="post" class="form-container">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" placeholder="请输入姓名">
+        
+        <label for="gender">性别:</label>
+        <select id="gender" name="gender">
+            <option value=""> </option>
+            <option value="male">男</option>
+            <option value="female">女</option>
+        </select>
+        
+        <label for="position">职位:</label>
+        <select id="position" name="position">
+            <option value=""> </option>
+            <option value="class_teacher">班主任</option>
+            <option value="lecturer">讲师</option>
+            <option value="student_affairs_officer">学工主管</option>
+            <option value="curriculum_officer">教研主管</option>
+            <option value="counselor">咨询师</option>
+        </select>
+        
+        <input type="submit" value="查询">
+        <input type="reset" value="重置">
+    </form>
+
+    <!-- 表格展示区 -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>头像</th>
+                    <th>职位</th>
+                    <th>入职日期</th>
+                    <th>最后操作时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>令狐冲</td>
+                    <td>男</td>
+                    <td><img src="images/linghuchong.jpg" alt="令狐冲" width="50"></td>
+                    <td>班主任</td>
+                    <td>2020-01-15</td>
+                    <td>2023-10-20 14:30</td>
+                    <td>
+                        <button class="edit-button">编辑</button>
+                        <button class="delete-button">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>任盈盈</td>
+                    <td>女</td>
+                    <td><img src="images/renyingying.jpg" alt="任盈盈" width="50"></td>
+                    <td>讲师</td>
+                    <td>2019-05-22</td>
+                    <td>2023-10-19 09:45</td>
+                    <td>
+                        <button class="edit-button">编辑</button>
+                        <button class="delete-button">删除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>向问天</td>
+                    <td>男</td>
+                    <td><img src="images/xiangwentian.jpg" alt="向问天" width="50"></td>
+                    <td>学工主管</td>
+                    <td>2018-11-08</td>
+                    <td>2023-10-18 16:20</td>
+                    <td>
+                        <button class="edit-button">编辑</button>
+                        <button class="delete-button">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 页脚版权部分 -->
+    <div class="footer">
+        <div class="footer-content">
+            <p>xxx有限公司</p>
+            <p>&copy; 2023 xxx有限公司，保留所有权利。</p>
+        </div>
+    </div>
+   </div>
+</body>
+</html>
+
+<!-- 提示词3：
+    再 生成第三个部分-表格展示区：
+    1.表格结构：展示列包括姓名，性别（显示男/女），头像（小图片展示），职位
+    （显示班主任，讲师，学工主管，教研主管，咨询师），入职日期，最后操作时间，操作（编辑，删除）
+    2.测试数据：基于笑傲江湖小说人物再表格中生成三条测试数据
+    3.样式：适当调整，美观大气
+-->
+
+<!-- 提示词4
+    再继续生成第四部分：页脚版权部分：
+    1.内容：第一行显示公司名称：“xxx有限公司”，第二行显示版权信息：&copy; 2023 xxx有限公司，保留所有权利。
+    2.设计：该区域有灰色背景，字体颜色为白色，居中对齐，以营造专业且同一的视觉效果 
+-->
