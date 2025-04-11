@@ -10,7 +10,7 @@
   <input type="button" id="btn1" value="点我一下试试1">
   <input type="button" id="btn2" value="点我一下试试2">
 
-  <script>
+  <!-- <script>
     //事件监听 - addEventListener (可以多次绑定同一事件)
     document.querySelector('#btn1').addEventListener('click', () => {
       console.log('试试就试试~~');
@@ -26,6 +26,13 @@
     document.querySelector('#btn2').onclick =  () => {
       console.log('试试就试试22~~');
     }
+  </script> -->
+
+  <script>
+    // 事件源：按钮
+    document.querySelector('#btn1').addEventListener('click', () => {
+      console.log('试试就试试~~');
+    });
   </script>
 </body>
 </html>
