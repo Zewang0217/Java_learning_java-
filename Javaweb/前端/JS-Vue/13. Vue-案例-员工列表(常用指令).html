@@ -77,6 +77,7 @@
     </style>
 </head>
 <body>
+    <!-- Vue接管部分 -->
     <div id="container">
         <!-- 顶部导航栏 -->
         <div class="navbar">
@@ -135,6 +136,7 @@
                     <td>{{e.gender == 1?'男' : '女'}}</td>
 
                     <!-- 插值表达式是不能出现在标签内部 -->
+                     <!-- v-bind: 控制元素的属性绑定 -->
                     <td><img class="avatar"  v-bind:src="e.image" :alt="e.name"></td>
 
                     <!-- v-if: 控制元素的显示与隐藏 -->
@@ -177,14 +179,17 @@
     <script type="module">
       import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
+      // 创建应用实例对象
       createApp({
         data() {
           return {
-            searchForm: { //封装用户输入的查询条件
+            searchForm: { // 封装用户输入的查询条件， 默认为空
                 name: '',
                 gender: '',
                 job: ''
             },
+
+            // 数组，方括号
             empList: [
               { "id": 1,
                 "name": "谢逊",

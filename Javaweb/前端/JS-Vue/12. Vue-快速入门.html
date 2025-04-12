@@ -6,24 +6,28 @@
   <title>Vue-快速入门</title>
 </head>
 <body>
-  
-  <div id="app">
-    <h1>{{message}}</h1>
-    <h1>{{count}}</h1>
-  </div>
-  
 
+  <div id="app">
+    <!-- 插值表达式 -->
+    <h1>{{message}}</h1>
+    <h2>{{count}}</h2>
+  </div>
+  <h2>{{count}}</h2>
   <script type="module">
+    // 模块化，引入vue
     import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
+    // 创建应用实例对象
     createApp({
+      // data() 方法用来返回要挂载到页面上的数据
       data() {
         return {
-          message: 'Hello Vue',
-          count: 100
+          message: 'Hello Vue!',
+          count : 100
         }
-      }
-    }).mount('#app');
+      },
+
+    }).mount("#app"); // 指定接管哪一个对象
   </script>
 </body>
 </html>
