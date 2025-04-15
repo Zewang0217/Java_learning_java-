@@ -552,3 +552,86 @@
   - 对计算字段或函数结果命名
   - 合并多个列时
   - 列名过长或不清晰时
+
+------
+
+ # 注意：
+
++ 同一个数据库服务器中，数据库名字不可以相同
++ Mysql8默认字符集：utf8mb4
+
+# 常用指令
+
++ 使用数据库
+  ```mysql
+  use db01;
+  ```
+
++ 查看正在使用的数据库
+  ```mysql
+  select database();
+  ```
+
++ 创建数据库
+  ```mysql
+  create database if not exists db02;
+  create database if not exists db04 default charset utf8mb4; 
+  ```
+
+  默认值
+
++ 删除数据库
+  ```mysql
+  drop database db04;
+  ```
+
++ `Mysql`图形化工具： DataGrip
+
+## DDL
+
+```mysql
+create table tablename(
+    字段1 字段类型 [约束] [comment 字段1注释], 
+    ...
+)[注释];
+```
+
+```mysql
+create table user(
+    id int comment 'ID, 唯一标识',
+    username varchar(50) comment '用户名',
+    name varchar(10) comment '姓名',
+    age int comment '年龄',
+    gender char(1) comment '性别'
+) comment '用户信息表';
+```
+
++ 约束：作用于表中字段上的规则，限制存储在表中的数据
+  + not null 非空
+  + unique 唯一，不重复
+  + primary key 唯一且非空（主键）
+  + default 默认
+  + foreign key 两张表建立连接
+
++ 主键自增 ： `auto_increment`
+
+
+
++  基础字段 ： id 主键； create_time 创建时间； update_time 更新时间；
+
+```mysql
+create table emp (
+    id int unsigned primary key auto_increment comment 'ID, 唯一标识，主键',
+    username varchar(20) not null unique comment '用户名', # 最小字符要在前端约束
+    password varchar(32) default '123456' comment '密码',
+    name varchar(10) not null comment '姓名',
+    gender tinyint unsigned not null comment '性别：1，男；2，女',
+    phone char(11) not null unique  comment '手机号',
+    job tinyint unsigned comment '职位，1，班主任；2，讲师；3，学工主管；4，教研主管；5，咨询师',
+    salary int unsigned comment '薪资',
+    entry_date date comment '入职日期',
+    image varchar(255) comment '头像',
+    create_time datetime comment '创建时间',
+    update_time datetime comment '更新时间'
+) comment '员工表';
+```
